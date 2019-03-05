@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-for="blog in blogs" :key="blog.id">
+    <div v-for="blog in blogs" :key="blog._id">
       <div>Nome:
-        <router-link to="/">{{blog.name}}</router-link>
+        <router-link :to="`/blogs/${blog._id}/posts`">{{blog.name}}</router-link>
       </div>
 
       <div>Descrição: {{blog.description}}</div>

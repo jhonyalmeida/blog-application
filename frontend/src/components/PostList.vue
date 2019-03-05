@@ -1,28 +1,21 @@
 <template>
   <div>
-    <div v-for="blog in blogs" :key="blog.id">
-      <div>Nome:
-        <router-link to="/">{{blog.name}}</router-link>
-      </div>
-      
-      <div>Descrição: {{blog.title}}</div>
-      <br>
-    </div>
-    <div v-if="blogs && blogs.length === 0">
-      <span>Nenhum blog encontrado =(</span>
-    </div>
+    Posts do blog {{blogId}}
   </div>
 </template>
 
 <script>
 export default {
   data: () => ({
-    blogs: []
+    posts: []
   }),
+  props: {
+    blogId: String
+  },
   mounted() {
-    fetch("http://192.168.0.117:8080/blogs")
+    fetch(`http://localhost:8081/blogs/${this.blogId}/posts`)
       .then(response => response.json())
-      .then(blogs => (this.blogs = blogs));
+      .then(posts => (this.posts = posts));
   }
 };
 </script>
