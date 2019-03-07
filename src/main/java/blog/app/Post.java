@@ -20,7 +20,7 @@ public class Post {
  
     @JsonIgnore
     protected ObjectId id;
-    private Blog blog;
+    private String blogId;
     private Section rootSection;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'.'SSS'Z'")

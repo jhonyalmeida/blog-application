@@ -21,10 +21,9 @@ public class Blog {
 
     @JsonIgnore
     protected ObjectId id;
-
     private String name;
     private String description;
-    private User user;
+    private String userId;
 
     @JsonProperty("_id")
     public String getStringId() {

@@ -34,9 +34,9 @@ public class BlogController {
         return blogRepository.findOne(new ObjectId(id));
     }
 
-    @Get("/{id}/blogs")
+    @Get("/{id}/posts")
     public Single<List<Post>> getPosts(String id) {
-        return postRepository.findByBlogId(new ObjectId(id));
+        return postRepository.findByBlogId(id);
     }
 
     @io.micronaut.http.annotation.Post
