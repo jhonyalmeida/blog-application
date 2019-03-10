@@ -2,6 +2,8 @@ package blog.app;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
@@ -34,7 +36,7 @@ public interface MongoReactiveRepository<T> {
         ).firstElement();
     }
 
-    default Single<T> create(T object) {
+    default Single<T> create(@Valid T object) {
         return Single.fromPublisher(
             getCollection().insertOne(object)
         )
@@ -45,7 +47,7 @@ public interface MongoReactiveRepository<T> {
         return Single.just(object);
     }
 
-    default Single<T> update(ObjectId id, T object) {
+    default Single<T> update(ObjectId id, @Valid T object) {
         return Single.fromPublisher(
             getCollection().findOneAndReplace(Filters.eq("_id", id), object)
         ).map(success -> object);

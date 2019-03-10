@@ -3,9 +3,9 @@ package blog.app;
 import java.util.List;
 
 import javax.inject.Singleton;
-import javax.validation.OverridesAttribute;
 
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoCollection;
 import com.mongodb.reactivestreams.client.Success;
@@ -31,6 +31,7 @@ public class PostRepository implements MongoReactiveRepository<Post> {
         return Flowable.fromPublisher(
             getCollection()
                 .find(Filters.eq("blogId", blogId))
+                .sort(Sorts.descending("timestamp"))
         ).toList();
     }
 

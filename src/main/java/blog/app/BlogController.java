@@ -1,8 +1,10 @@
 package blog.app;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import com.mongodb.client.result.DeleteResult;
 
@@ -13,9 +15,12 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Delete;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Put;
+import io.micronaut.http.annotation.QueryValue;
+import io.micronaut.validation.Validated;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 
+@Validated
 @Controller("/blogs")
 public class BlogController {
 
@@ -25,8 +30,8 @@ public class BlogController {
     private PostRepository postRepository;
 
     @Get
-    public Single<List<Blog>> getList() {
-        return blogRepository.findAll();
+    public Single<List<Blog>> getList(@QueryValue Optional<String> userId) {
+        return userId.isPresent() ? blogRepository.findByUser(userId.get()) : blogRepository.findAll();
     }
 
     @Get("/{id}")
@@ -40,12 +45,12 @@ public class BlogController {
     }
 
     @io.micronaut.http.annotation.Post
-    public Single<Blog> create(@Body Blog blog) {
+    public Single<Blog> create(@Body @Valid Blog blog) {
         return blogRepository.create(blog);
     }
 
     @Put("/{id}")
-    public Single<Blog> update(@Body Blog blog, String id) {
+    public Single<Blog> update(@Body @Valid Blog blog, String id) {
         return blogRepository.update(new ObjectId(id), blog);
     }
 

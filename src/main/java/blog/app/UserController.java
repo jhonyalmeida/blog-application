@@ -12,6 +12,7 @@ import io.reactivex.Single;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import com.mongodb.client.result.DeleteResult;
 
@@ -23,18 +24,13 @@ public class UserController {
     @Inject
     private UserRepository userRepository;
 
-    @Get
-    public Single<List<User>> getList() {
-        return userRepository.findAll();
-    }
-
     @Get("/{id}")
     public Maybe<User> getOne(String id) {
         return userRepository.findOne(new ObjectId(id));
     }
 
     @Post
-    public Single<User> create(@Body User user) {
+    public Single<User> create(@Body @Valid User user) {
         return userRepository.create(user);
     }
 
@@ -51,6 +47,11 @@ public class UserController {
     @Get("/clear")
     public Single<List<DeleteResult>> clear() {
         return userRepository.clear();
+    }
+
+    @Post("/login")
+    public Maybe<User> login(@Body User user) {
+        return userRepository.findByLoginAndPassword(user);
     }
 
 }

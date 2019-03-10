@@ -1,7 +1,8 @@
 package blog.app;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,18 +22,21 @@ public class Blog {
 
     @JsonIgnore
     protected ObjectId id;
+
+    @NotBlank
     private String name;
+
     private String description;
+
+    @NotBlank
     private String userId;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'.'SSS'Z'")
+    private LocalDateTime lastPublished;
 
     @JsonProperty("_id")
     public String getStringId() {
         return id != null ? id.toHexString() : null;
     }
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'.'SSS'Z'")
-    private LocalDateTime lastPublished;
-
-    private List<Post> posts;
 
 }

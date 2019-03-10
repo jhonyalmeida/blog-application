@@ -3,6 +3,7 @@ package blog.app;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import com.mongodb.client.result.DeleteResult;
 
@@ -33,12 +34,12 @@ public class PostController {
     }
 
     @io.micronaut.http.annotation.Post
-    public Single<Post> create(@Body Post post) {
+    public Single<Post> create(@Body @Valid Post post) {
         return postRepository.create(post);
     }
 
     @Put("/{id}")
-    public Single<Post> update(@Body Post post, String id) {
+    public Single<Post> update(@Body @Valid Post post, String id) {
         return postRepository.update(new ObjectId(id), post);
     }
 
