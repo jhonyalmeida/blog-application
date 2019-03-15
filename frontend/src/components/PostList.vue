@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1 v-if="blog">{{blog.name}}</h1>
         <div v-for="post in posts" :key="post._id">
             <h2>{{post.rootSection.title}}</h2>
             <em>{{new Date(post.timestamp).toLocaleString() }}</em>
@@ -22,12 +23,17 @@ import Subsection from './Subsection'
 export default {
   components: { Subsection },
   data: () => ({
+    blog: null,
     posts: []
   }),
   props: {
     blogId: String
   },
   mounted() {
+    fetch(`http://localhost:8081/blogs/${this.blogId}`)
+      .then(response => response.json())
+      .then(blog => (this.blog = blog));
+    
     fetch(`http://localhost:8081/blogs/${this.blogId}/posts`)
       .then(response => response.json())
       .then(posts => (this.posts = posts));
