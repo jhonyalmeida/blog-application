@@ -30,7 +30,7 @@ public class Post {
     @NotNull
     private Section rootSection;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'.'SSS'Z'")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime timestamp = LocalDateTime.now();
 
     @JsonProperty("_id")

@@ -3,6 +3,9 @@ import Router from 'vue-router'
 import LoginForm from './components/LoginForm.vue'
 import Blogs from './components/BlogList.vue'
 import Posts from './components/PostList.vue'
+import UserForm from './components/UserForm.vue'
+import BlogForm from './components/BlogForm.vue'
+import PostForm from './components/PostForm.vue'
 
 Vue.use(Router)
 
@@ -28,17 +31,18 @@ export default new Router({
     {
       path: '/new-user',
       name: 'UserForm',
-      component: LoginForm
+      component: UserForm
     },
     {
       path: '/new-blog',
       name: 'BlogForm',
-      component: LoginForm
+      component: BlogForm
     },
     {
-      path: '/new-post',
+      path: '/blogs/:blogId/new-post',
       name: 'PostForm',
-      component: LoginForm
+      component: PostForm,
+      props: true
     }
   ]
 })

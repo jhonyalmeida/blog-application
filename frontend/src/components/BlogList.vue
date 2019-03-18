@@ -2,11 +2,13 @@
   <div>
     <div v-for="blog in blogs" :key="blog._id">
       <div>Nome:
-        <router-link :to="`/blogs/${blog._id}/posts`">{{blog.name}}</router-link>
+        <router-link :to="`/blogs/${blog._id}/posts`">{{ blog.name }}</router-link>
       </div>
-
-      <div>Descrição: {{blog.description}}</div>
-      <br>
+      <div>Descrição: {{ blog.description }}</div>
+      <div v-if="blog.lastPublished">
+        Última Publicação: {{ new Date(blog.lastPublished).toLocaleString() }}
+      </div>
+      <br />
     </div>
     <div v-if="blogs && blogs.length === 0">
       <span>Nenhum blog encontrado =(</span>

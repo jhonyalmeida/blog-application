@@ -30,7 +30,7 @@ export default {
                 password: this.password
             })
         })
-        .then(response => response.status === 200 ? response.json() : Promise.reject())
+        .then(response => response.ok ? response.json() : Promise.reject())
         .then(user => {
             localStorage.setItem('user.token', user._id)
             localStorage.setItem('user.name', user.login)

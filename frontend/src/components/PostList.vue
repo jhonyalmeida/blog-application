@@ -1,9 +1,13 @@
 <template>
     <div>
-        <h1 v-if="blog">{{blog.name}}</h1>
+        <h1 v-if="blog">{{ blog.name }}</h1>
+        <div v-if="isOwner">
+          <router-link :to="`/blogs/${blogId}/new-post`">New Post</router-link>
+          <br /><br />
+        </div>
         <div v-for="post in posts" :key="post._id">
-            <h2>{{post.rootSection.title}}</h2>
-            <em>{{new Date(post.timestamp).toLocaleString() }}</em>
+            <h2>{{ post.rootSection.title }}</h2>
+            <em>{{ new Date(post.timestamp).toLocaleString() }}</em>
             <p>{{post.rootSection.content}}</p>
             <subsection v-for="(section, index) in post.rootSection.sections" 
                 :key="index" 
@@ -28,6 +32,11 @@ export default {
   }),
   props: {
     blogId: String
+  },
+  computed: {
+    isOwner: function () {
+      return this.blog && this.blog.userId === localStorage.getItem('user.token')  
+    }
   },
   mounted() {
     fetch(`http://localhost:8081/blogs/${this.blogId}`)
