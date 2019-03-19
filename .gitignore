@@ -1,9 +1,12 @@
 Thumbs.db
 .DS_Store
 .gradle
+.vscode
+bin/
 build/
 target/
 out/
+src/main/resources/public/
 .idea
 *.iml
 *.ipr
