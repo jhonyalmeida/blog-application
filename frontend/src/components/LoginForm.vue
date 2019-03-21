@@ -1,12 +1,19 @@
 <template>
-  <div>
-    <span v-show="error">{{error}}</span>
+  <div class="container">
+    <div class="alert alert-danger" role="alert" v-show="error">{{ error }}</div>
     <form @submit.prevent="onSubmit">
+      <div class="form-group">
         <label for="username">Username:</label>
-        <input id="username" type="text" v-model="username" />
+        <input class="form-control" id="username" type="text" v-model="username" />
+      </div>
+      <div class="form-group">
         <label for="password">Password:</label>
-        <input id="password" type="password" v-model="password" />
-        <button type="submit">Acessar</button>
+        <input class="form-control" id="password" type="password" v-model="password" />
+      </div>
+      <br />
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Acessar</button>
+      </div>
     </form>
   </div>
 </template>

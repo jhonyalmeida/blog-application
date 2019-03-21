@@ -1,19 +1,20 @@
 <template>
-    <div>
+    <div class="container">
         <h1 v-if="blog">{{ blog.name }}</h1>
         <div v-if="isOwner">
           <router-link :to="`/blogs/${blogId}/new-post`">New Post</router-link>
           <br /><br />
         </div>
-        <div v-for="post in posts" :key="post._id">
-            <h2>{{ post.rootSection.title }}</h2>
+        <div class="card mb-3" v-for="post in posts" :key="post._id">
+          <div class="card-body pb-0">
+            <h5 class="card-title">{{ post.rootSection.title }}</h5>
             <em>{{ new Date(post.timestamp).toLocaleString() }}</em>
-            <p>{{post.rootSection.content}}</p>
+            <p class="card-text">{{post.rootSection.content}}</p>
             <subsection v-for="(section, index) in post.rootSection.sections" 
                 :key="index" 
                 :number="`${index+1}`"
                 :section="section" />
-            <br />
+          </div>
         </div>
         <div v-if="posts && posts.length === 0">
             <span>Nada foi publicado neste blog ainda =(</span>

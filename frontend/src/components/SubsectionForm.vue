@@ -1,17 +1,19 @@
 <template>
-    <div>
-        <h4>Section {{ number }}</h4>
+    <div class="container">
+        <strong># Section {{ number }}</strong>
         <div v-if="section">
             <div>
                 <label for="title">Title:</label>
-                <input id="title" type="text" v-model="section.title" @input="handleInput" />
+                <input class="form-control" id="title" type="text" v-model="section.title" @input="handleInput" />
             </div>
             <div>
                 <label for="content">Content:</label>
-                <textarea id="content" v-model="section.content" @input="handleInput" />
+                <textarea class="form-control" id="content" v-model="section.content" @input="handleInput" />
             </div>
             <div>
-                <a class="pointer" @click="addSubSection">+ Add SubSection</a>
+                <p>
+                    <a class="pointer" @click="addSubSection">+ Add SubSection</a>
+                </p>
                 <subsectionForm v-for="(subsection, index) in section.sections" 
                     :key="index"
                     v-model="section.sections[index]"

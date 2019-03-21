@@ -1,19 +1,18 @@
 <template>
-  <div>
+  <div class="container">
     <form @submit.prevent="onSubmit">
-        <div>
-            <span v-show="error">{{ error }}</span>
-        </div>
-        <div>
+        <div class="alert alert-danger" role="alert" v-show="error">{{ error }}</div>
+        <div class="form-group">
             <label for="name">Name:</label>
-            <input id="name" type="text" v-model="name" />
+            <input class="form-control" id="name" type="text" v-model="name" />
         </div>
-        <div>
+        <div class="form-group">
             <label for="description">Description:</label>
-            <textarea id="description" v-model="description" />
+            <textarea class="form-control" id="description" v-model="description" />
         </div>
-        <div>
-            <button type="submit">Salvar</button>
+        <br />
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Salvar</button>
         </div>
     </form>
   </div>

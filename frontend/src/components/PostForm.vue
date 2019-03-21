@@ -1,26 +1,27 @@
 <template>
-  <div>
+  <div class="container">
     <form @submit.prevent="onSubmit">
-        <div>
-            <span v-show="error">{{ error }}</span>
-        </div>
-        <div>
+        <div class="alert alert-danger" role="alert" v-show="error">{{ error }}</div>
+        <div class="row">
             <label for="title">Title:</label>
-            <input id="title" type="text" v-model="rootSection.title" />
+            <input class="form-control" id="title" type="text" v-model="rootSection.title" />
         </div>
-        <div>
+        <div class="row">
             <label for="content">Content:</label>
-            <textarea id="content" v-model="rootSection.content" />
+            <textarea class="form-control" id="content" v-model="rootSection.content" />
         </div>
         <div>
-            <a class="pointer" @click="addSection">+ Add Section</a>
+            <p>
+                <a class="pointer" @click="addSection">+ Add Section</a>
+            </p>
             <subsection-form v-for="(section, index) in rootSection.sections" 
                     :key="index"
                     v-model="rootSection.sections[index]"
                     :number="`${index+1}`" />
         </div>
-        <div>
-            <button type="submit">Salvar</button>
+        <br />
+        <div class="row">
+            <button class="btn btn-primary" type="submit">Salvar</button>
         </div>
     </form>
   </div>
