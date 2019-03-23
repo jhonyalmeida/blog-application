@@ -23,6 +23,13 @@ public class BlogRepository implements MongoReactiveRepository<Blog> {
         this.mongoClient = mongoClient;
     }
 
+    @Override
+    public Single<List<Blog>> findAll() {
+        return Flowable.fromPublisher(
+            getCollection().find().sort(Sorts.descending("lastPublished"))
+        ).toList();
+    }
+
     public Single<List<Blog>> findByUser(String userId) {
         return Flowable.fromPublisher(
             getCollection()
